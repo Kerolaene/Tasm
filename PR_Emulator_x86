@@ -1,0 +1,32 @@
+data segment
+a db 119
+b db -12
+c db -13
+chastn db ?
+ost db ?        
+data ends
+
+stk segment stack
+    db 256 dup ('?')
+stk ends
+.186
+code segment 
+main:   
+assume cs:code, ds:data, ss:stk
+    mov ax,data
+    mov ds,ax 
+    mov al,a
+    cbw
+    
+    mov bx,ax
+    mov al,b
+    cbw
+     
+    add ax,bx
+    idiv c
+    mov chastn,al
+    mov ost,ah
+    
+    mov ax,4c00h
+    int 21h
+end main
