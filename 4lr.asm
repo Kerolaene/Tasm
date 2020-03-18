@@ -11,19 +11,17 @@ buf db 20
 db 20 dup (?)
 .code
 begin: mov ax,@data
-mov ds,ax
-mov ah,9
-lea dx,message
-int 21h
-mov ah,7
-int 21h
-mov ax,4c00h
-int 21h
+    mov ds,ax
+    mov ah,9
+    lea dx,message
+    int 21h
+    mov ax,4c00h
+    int 21h
 end begin
-____________________________
+---------------------
 data segment
-    mes1 db 'Input your name-> $'
-mes2 db 10,13,'Hello$'
+mes1 db 'Input your name-> $'
+mes2 db 10,13,'Hello $'
 buf db 20
 db ?
 db 20 dup (?)
