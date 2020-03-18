@@ -4,10 +4,11 @@ data segment
     OneWord db "input one word = >","$"
     TwoWord  db "input two word = >","$"
 
-    meseg db 10,13,"$"
+    probel db 10,13,"$"
 
     BufOne db 30, ?, 31 dup(?)
     BufTwo db 30, ?, 31 dup(?)
+
     
 data ends
 stk segment stack
@@ -16,6 +17,7 @@ stk ends
 code segment
     main:
         assume cs:code,ds:data,ss:stk
+        ;input one word
         mov ax,data
         mov ds,ax
         mov ah,9
@@ -29,10 +31,15 @@ code segment
         mov BufOne[bx+2],'$'
         mov si,1
         mov dl,BufOne[si]
+        ;------------------
+       
         
+        mov [BufOne+3],'$'
         mov ah,9
-        lea dx,meseg
+        lea dx,probel
         int 21h
+        
+        ;input two word
         lea dx,TwoWord
         int 21h
 
@@ -44,26 +51,43 @@ code segment
         mov BufTwo[bx+2],'$'
 
         mov ah,9
-        lea dx,meseg
+        lea dx,probel
         int 21h
-        
-
-        mov si,1
-        mov dl,BufTwo[si]
-        
+       
+       ;outpot one
         mov ah,9
-        lea dx,BufOne + 2
+        lea dx,[BufOne + 2]
+        int 21h
+
+        ;probel
+        mov ah,02h
+        mov dl,' '
+        int 21h
+        ;poslednya bukvya
+        
+        lea si,[BufOne+1] 
+        mov cx,0
+        mov cl,[si]
+        add si,cx
+        mov ah,02h
+        mov dl,[si]
         int 21h
         
+        ;mov al,BufOne[si]
+        ;mov 
+        ;mov di,[di+2]
+        ;int 21h
+        ;probel
         mov ah,02h
         mov dl,' '
         int 21h
 
-
+        ;outpot two
         mov ah,9
-        lea dx,BufTwo + 2
+        lea dx,[BufTwo + 2]
         int 21h
-
+        
+        
         mov ah,7
         int 21h
         mov ax,4c00h
