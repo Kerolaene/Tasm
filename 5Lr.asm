@@ -46,12 +46,17 @@ code segment
         mov ah,9
         lea dx,meseg
         int 21h
+        
 
         mov si,1
         mov dl,BufTwo[si]
         
         mov ah,9
         lea dx,BufOne + 2
+        int 21h
+        
+        mov ah,02h
+        mov dl,' '
         int 21h
 
 
