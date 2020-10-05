@@ -2,22 +2,6 @@ masm
 model small
 stack 256
 .data
-kajdiy  db  "Kajdiy"
-lenK = $ - kajdiy
-ohotnik db  "ohotnik"
-lenO = $ - ohotnik
-jelaet  db  "jelaet"
-lenJ = $ - jelaet
-znat    db  "znat'"
-lenZ = $ - znat
-gde     db  "gde"
-lenG = $ - gde
-sidit   db  "sidit"
-lenS = $ - sidit
-fazan   db  "fazan"
-lenF = $ - fazan
-press   db  "Press any key to continue"
-lenPress = $ - press
 
 window macro x1, y1, x2, y2
     mov ah, 4
@@ -71,7 +55,7 @@ main:   mov ax, @data
         
         mov ax, 0b800h
         mov es, ax
-        mov bx, (80*24)*2
+        ;  mov bx, (80*24)*2
         lea si, press
         mov cx, lenPress
 m0:     mov al, [si]
